@@ -1,0 +1,66 @@
+# Azure Resource Configuration
+resource_group_name = "rg-produto-api-prod"
+location           = "East US"
+
+# API Management Configuration
+apim_name       = "apim-produto-api-prod"
+publisher_name  = "Your Company Name"
+publisher_email = "admin@yourcompany.com"
+sku_name       = "Developer_1"  # Options: Developer_1, Basic_1, Basic_2, Standard_1, Standard_2, Premium_1, etc.
+
+# Backend Configuration
+backend_url     = "https://your-produto-api.azurecontainer.io"
+backend_api_key = "your-optional-api-key-here"  # Leave empty if not needed
+
+# API Configuration
+api_version = "v2"
+api_path    = "produtos"
+
+# Monitoring Configuration
+enable_application_insights = true
+
+# Tags
+tags = {
+  Environment = "Production"
+  Project     = "Produto API"
+  Owner       = "DevOps Team"
+  CreatedBy   = "Terraform"
+  CostCenter  = "IT-001"
+}
+
+# API Management Policies
+api_management_policies = {
+  enable_cors              = true
+  cors_allowed_origins     = ["https://yourfrontend.com", "https://yourdomain.com"]
+  enable_rate_limiting     = true
+  rate_limit_calls         = 1000
+  rate_limit_renewal_period = 3600  # 1 hour in seconds
+  enable_ip_filtering      = false
+  allowed_ips              = []
+}
+
+# Subscription Key Configuration
+subscription_key_header_name = "Ocp-Apim-Subscription-Key"
+subscription_key_query_name  = "subscription-key"
+
+# Developer Portal
+enable_developer_portal = true
+
+# Notification Configuration
+notification_sender_email = "noreply@yourcompany.com"
+
+# SSL Certificate Configuration (for custom domains)
+certificate_configuration = {
+  enable_custom_domain = false
+  gateway_hostname     = ""  # e.g., "api.yourcompany.com"
+  portal_hostname      = ""  # e.g., "developer.yourcompany.com"
+  certificate_path     = ""  # Path to your SSL certificate
+  certificate_password = ""  # Certificate password
+}
+
+# Virtual Network Configuration (for private deployment)
+virtual_network_configuration = {
+  enable_vnet_integration = false
+  subnet_id               = ""  # Resource ID of your subnet
+  vnet_type              = "None"  # Options: None, External, Internal
+}
